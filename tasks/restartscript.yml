@@ -18,52 +18,52 @@
 
 # Shutdown current network configuration
 - lineinfile: line="\1 {{ item.item.device }}" dest={{ mktemp_script.stdout }} state=present insertafter=EOF backrefs=True regexp='(ifdown .*)'
-  with_items: "{{ ether_result.results }}"
+  with_items: "{{ ether_result.results | default([]) }}"
   when: ether_result is defined and 'results' in ether_result and item.changed
 
 - lineinfile: line="\1 {{ item.item.1 }}" dest={{ mktemp_script.stdout }} state=present  insertafter=EOF backrefs=True regexp='(ifdown .*)'
-  with_items: "{{ bond_port_result.results }}"
+  with_items: "{{ bond_port_result.results | default([]) }}"
   when: bond_port_result is defined and 'results' in bond_port_result and item.changed
 
 - lineinfile: line="\1 {{ item.item.device }}" dest={{ mktemp_script.stdout }} state=present insertafter=EOF backrefs=True regexp='(ifdown .*)'
-  with_items: "{{ bond_result.results }}"
+  with_items: "{{ bond_result.results | default([]) }}"
   when: bond_result is defined and 'results' in bond_result and item.changed
 
 - lineinfile: line="\1 {{ item.item.device }}" dest={{ mktemp_script.stdout }} state=present insertafter=EOF backrefs=True regexp='(ifdown .*)'
-  with_items: "{{ vlan_result.results }}"
+  with_items: "{{ vlan_result.results | default([]) }}"
   when: vlan_result is defined and item.changed
 
 - lineinfile: line="\1 {{ item.item.device }}" dest={{ mktemp_script.stdout }} state=present insertafter=EOF backrefs=True regexp='(ifdown .*)'
-  with_items: "{{ bridge_result.results }}"
+  with_items: "{{ bridge_result.results | default([]) }}"
   when: bridge_result is defined and 'results' in bridge_result and item.changed
 
 - lineinfile: line="\1 {{ item.item.1 }};" dest={{ mktemp_script.stdout }} state=present insertafter=EOF backrefs=True regexp='(ifdown .*)'
-  with_items: "{{ bridge_port_result.results }}"
+  with_items: "{{ bridge_port_result.results | default([]) }}"
   when: bridge_port_result is defined and 'results' in bridge_port_result and item.changed
 
 # Start new network configuration
 - lineinfile: line="\1 {{ item.item.device }}" dest={{ mktemp_script.stdout }} state=present insertafter=EOF backrefs=True regexp='(ifup .*)'
-  with_items: "{{ ether_result.results }}"
+  with_items: "{{ ether_result.results | default([]) }}"
   when: ether_result is defined and 'results' in ether_result and item.changed
 
 - lineinfile: line="\1 {{ item.item.1 }}" dest={{ mktemp_script.stdout }} state=present  insertafter=EOF backrefs=True regexp='(ifup .*)'
-  with_items: "{{ bond_port_result.results }}"
+  with_items: "{{ bond_port_result.results | default([]) }}"
   when: bond_port_result is defined and 'results' in bond_port_result and item.changed
 
 - lineinfile: line="\1 {{ item.item.device }}" dest={{ mktemp_script.stdout }} state=present insertafter=EOF backrefs=True regexp='(ifup .*)'
-  with_items: "{{ bond_result.results }}"
+  with_items: "{{ bond_result.results | default([]) }}"
   when: bond_result is defined and 'results' in bond_result and item.changed
 
 - lineinfile: line="\1 {{ item.item.device }}" dest={{ mktemp_script.stdout }} state=present insertafter=EOF backrefs=True regexp='(ifup .*)'
-  with_items: "{{ vlan_result.results }}"
+  with_items: "{{ vlan_result.results | default([]) }}"
   when: vlan_result is defined and item.changed
 
 - lineinfile: line="\1 {{ item.item.device }}" dest={{ mktemp_script.stdout }} state=present insertafter=EOF backrefs=True regexp='(ifup .*)'
-  with_items: "{{ bridge_result.results }}"
+  with_items: "{{ bridge_result.results | default([]) }}"
   when: bridge_result is defined and 'results' in bridge_result and item.changed
 
 - lineinfile: line="\1 {{ item.item.1 }}" dest={{ mktemp_script.stdout }} state=present insertafter=EOF backrefs=True regexp='(ifup .*)'
-  with_items: "{{ bridge_port_result.results }}"
+  with_items: "{{ bridge_port_result.results | default([]) }}"
   when: bridge_port_result is defined and 'results' in bridge_port_result and item.changed
 
 # Execute configuration change
