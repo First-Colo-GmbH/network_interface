@@ -97,6 +97,12 @@
 # Restart Network Interfaces (deconfigurate & reconfigurate interfaces)
 - include: restartscript.yml
   when: network_allow_service_restart and ansible_os_family == 'Debian'
+     and (ether_result is changed
+          or bond_port_result is changed
+          or bond_result is changed
+          or vlan_result is changed
+          or bridge_result is changed
+          or bridge_port_result is changed)
 
 - name: Enable the "network" service
   service:
