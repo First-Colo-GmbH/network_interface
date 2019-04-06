@@ -91,6 +91,7 @@
   with_subelements:
     - '{{ network_bridge_interfaces }}'
     - bridge_ports
+    - skip_missing: True
   when: network_bridge_interfaces is defined
   register: bridge_port_result
 
