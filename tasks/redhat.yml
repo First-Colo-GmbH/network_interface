@@ -1,9 +1,8 @@
 ---
 - name: Install the required  packages in Redhat derivatives
   yum:
-    name: "{{ item }}"
-    state: installed
-  with_items: "{{ network_pkgs }}"
+    name: "{{ network_pkgs }}"
+    state: present
   when: network_check_packages
 
 - name: Write configuration files for rhel route configuration with vlan

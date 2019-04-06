@@ -1,9 +1,8 @@
 ---
 - name: Install the required packages in Debian derivatives
   apt:
-    name: "{{ item }}"
-    state: installed
-  with_items: "{{ network_pkgs }}"
+    name: "{{ network_pkgs }}"
+    state: present
   environment: "{{ env }}"
   when: network_check_packages
 
